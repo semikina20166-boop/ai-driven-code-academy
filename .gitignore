@@ -1,0 +1,15 @@
+.env
+node_modules/
+dist/
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.idea/
+.vscode/
+*.log
+ai-model/.venv/
+ai-model/output/
+ai-model/data/train.jsonl

@@ -1,0 +1,80 @@
+Track 1: Python — трек
+  Level 1: title='Python / Начальный — Введение в переменные и функции' | diff='easy' | order_num=1
+  Level 6: title='Python / Начальный — Условные операторы и логика' | diff='easy' | order_num=2
+  Level 11: title='Python / Начальный — Циклы и итерации' | diff='easy' | order_num=3
+  Level 16: title='Python / Начальный — Вложенные конструкции' | diff='easy' | order_num=4
+  Level 21: title='Python / Начальный — Массивы и списки' | diff='easy' | order_num=5
+  Level 26: title='Python / Средний — Словари и хэш-таблицы' | diff='medium' | order_num=1
+  Level 31: title='Python / Средний — Алгоритмы сортировки и поиска' | diff='medium' | order_num=2
+  Level 36: title='Python / Средний — Методы обработки строк' | diff='medium' | order_num=3
+  Level 41: title='Python / Средний — Исключения и обработка ошибок' | diff='medium' | order_num=4
+  Level 46: title='Python / Средний — Рекурсивные алгоритмы' | diff='medium' | order_num=5
+  Level 51: title='Python / Продвинутый — ООП: Классы и свойства' | diff='hard' | order_num=1
+  Level 56: title='Python / Продвинутый — ООП: Наследование и полиморфизм' | diff='hard' | order_num=2
+  Level 61: title='Python / Продвинутый — Потоки и асинхронность' | diff='hard' | order_num=3
+  Level 66: title='Python / Продвинутый — Замыкания и функции высшего порядка' | diff='hard' | order_num=4
+  Level 71: title='Python / Продвинутый — Big O: Оценка сложности' | diff='hard' | order_num=5
+Track 2: C# — трек
+  Level 2: title='C# / Начальный — Введение в переменные и функции' | diff='easy' | order_num=1
+  Level 7: title='C# / Начальный — Условные операторы и логика' | diff='easy' | order_num=2
+  Level 12: title='C# / Начальный — Циклы и итерации' | diff='easy' | order_num=3
+  Level 17: title='C# / Начальный — Вложенные конструкции' | diff='easy' | order_num=4
+  Level 22: title='C# / Начальный — Массивы и списки' | diff='easy' | order_num=5
+  Level 27: title='C# / Средний — Словари и хэш-таблицы' | diff='medium' | order_num=1
+  Level 32: title='C# / Средний — Алгоритмы сортировки и поиска' | diff='medium' | order_num=2
+  Level 37: title='C# / Средний — Методы обработки строк' | diff='medium' | order_num=3
+  Level 42: title='C# / Средний — Исключения и обработка ошибок' | diff='medium' | order_num=4
+  Level 47: title='C# / Средний — Рекурсивные алгоритмы' | diff='medium' | order_num=5
+  Level 52: title='C# / Продвинутый — ООП: Классы и свойства' | diff='hard' | order_num=1
+  Level 57: title='C# / Продвинутый — ООП: Наследование и полиморфизм' | diff='hard' | order_num=2
+  Level 62: title='C# / Продвинутый — Потоки и асинхронность' | diff='hard' | order_num=3
+  Level 67: title='C# / Продвинутый — Замыкания и функции высшего порядка' | diff='hard' | order_num=4
+  Level 72: title='C# / Продвинутый — Big O: Оценка сложности' | diff='hard' | order_num=5
+Track 3: PHP — трек
+  Level 3: title='PHP / Начальный — Введение в переменные и функции' | diff='easy' | order_num=1
+  Level 8: title='PHP / Начальный — Условные операторы и логика' | diff='easy' | order_num=2
+  Level 13: title='PHP / Начальный — Циклы и итерации' | diff='easy' | order_num=3
+  Level 18: title='PHP / Начальный — Вложенные конструкции' | diff='easy' | order_num=4
+  Level 23: title='PHP / Начальный — Массивы и списки' | diff='easy' | order_num=5
+  Level 28: title='PHP / Средний — Словари и хэш-таблицы' | diff='medium' | order_num=1
+  Level 33: title='PHP / Средний — Алгоритмы сортировки и поиска' | diff='medium' | order_num=2
+  Level 38: title='PHP / Средний — Методы обработки строк' | diff='medium' | order_num=3
+  Level 43: title='PHP / Средний — Исключения и обработка ошибок' | diff='medium' | order_num=4
+  Level 48: title='PHP / Средний — Рекурсивные алгоритмы' | diff='medium' | order_num=5
+  Level 53: title='PHP / Продвинутый — ООП: Классы и свойства' | diff='hard' | order_num=1
+  Level 58: title='PHP / Продвинутый — ООП: Наследование и полиморфизм' | diff='hard' | order_num=2
+  Level 63: title='PHP / Продвинутый — Потоки и асинхронность' | diff='hard' | order_num=3
+  Level 68: title='PHP / Продвинутый — Замыкания и функции высшего порядка' | diff='hard' | order_num=4
+  Level 73: title='PHP / Продвинутый — Big O: Оценка сложности' | diff='hard' | order_num=5
+Track 4: JavaScript — трек
+  Level 4: title='JavaScript / Начальный — Введение в переменные и функции' | diff='easy' | order_num=1
+  Level 9: title='JavaScript / Начальный — Условные операторы и логика' | diff='easy' | order_num=2
+  Level 14: title='JavaScript / Начальный — Циклы и итерации' | diff='easy' | order_num=3
+  Level 19: title='JavaScript / Начальный — Вложенные конструкции' | diff='easy' | order_num=4
+  Level 24: title='JavaScript / Начальный — Массивы и списки' | diff='easy' | order_num=5
+  Level 29: title='JavaScript / Средний — Словари и хэш-таблицы' | diff='medium' | order_num=1
+  Level 34: title='JavaScript / Средний — Алгоритмы сортировки и поиска' | diff='medium' | order_num=2
+  Level 39: title='JavaScript / Средний — Методы обработки строк' | diff='medium' | order_num=3
+  Level 44: title='JavaScript / Средний — Исключения и обработка ошибок' | diff='medium' | order_num=4
+  Level 49: title='JavaScript / Средний — Рекурсивные алгоритмы' | diff='medium' | order_num=5
+  Level 54: title='JavaScript / Продвинутый — ООП: Классы и свойства' | diff='hard' | order_num=1
+  Level 59: title='JavaScript / Продвинутый — ООП: Наследование и полиморфизм' | diff='hard' | order_num=2
+  Level 64: title='JavaScript / Продвинутый — Потоки и асинхронность' | diff='hard' | order_num=3
+  Level 69: title='JavaScript / Продвинутый — Замыкания и функции высшего порядка' | diff='hard' | order_num=4
+  Level 74: title='JavaScript / Продвинутый — Big O: Оценка сложности' | diff='hard' | order_num=5
+Track 5: Java — трек
+  Level 5: title='Java / Начальный — Введение в переменные и функции' | diff='easy' | order_num=1
+  Level 10: title='Java / Начальный — Условные операторы и логика' | diff='easy' | order_num=2
+  Level 15: title='Java / Начальный — Циклы и итерации' | diff='easy' | order_num=3
+  Level 20: title='Java / Начальный — Вложенные конструкции' | diff='easy' | order_num=4
+  Level 25: title='Java / Начальный — Массивы и списки' | diff='easy' | order_num=5
+  Level 30: title='Java / Средний — Словари и хэш-таблицы' | diff='medium' | order_num=1
+  Level 35: title='Java / Средний — Алгоритмы сортировки и поиска' | diff='medium' | order_num=2
+  Level 40: title='Java / Средний — Методы обработки строк' | diff='medium' | order_num=3
+  Level 45: title='Java / Средний — Исключения и обработка ошибок' | diff='medium' | order_num=4
+  Level 50: title='Java / Средний — Рекурсивные алгоритмы' | diff='medium' | order_num=5
+  Level 55: title='Java / Продвинутый — ООП: Классы и свойства' | diff='hard' | order_num=1
+  Level 60: title='Java / Продвинутый — ООП: Наследование и полиморфизм' | diff='hard' | order_num=2
+  Level 65: title='Java / Продвинутый — Потоки и асинхронность' | diff='hard' | order_num=3
+  Level 70: title='Java / Продвинутый — Замыкания и функции высшего порядка' | diff='hard' | order_num=4
+  Level 75: title='Java / Продвинутый — Big O: Оценка сложности' | diff='hard' | order_num=5

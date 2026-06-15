@@ -1,0 +1,436 @@
+[
+  {
+    "task_text": "Напишите функцию sum_two(a, b), которая возвращает сумму двух чисел.",
+    "user_code": "def sum_two(a, b):\n    return a + b + 1\n",
+    "error": "AssertionError: expected 3, got 4",
+    "hint": "При a=1 и b=2 результат на единицу больше ожидаемого. Какое арифметическое действие даёт именно сумму, без лишних слагаемых?",
+    "level_title": "Python / Начальный — уровень 1",
+    "difficulty_name": "Начальный",
+    "allowed_concepts": ["переменная", "функция", "return"]
+  },
+  {
+    "task_text": "Напишите функцию sum_two(a, b), которая возвращает сумму двух чисел.",
+    "user_code": "def sum_two(a, b):\n    return str(a) + str(b)\n",
+    "error": "TypeError или тесты не пройдены: ожидалось число",
+    "hint": "Сложение строк склеивает текст, а не числа. Какой тип должен вернуться по условию и как сложить именно числа?",
+    "level_title": "Python / Начальный — уровень 1",
+    "difficulty_name": "Начальный",
+    "allowed_concepts": ["переменная", "функция", "return"]
+  },
+  {
+    "task_text": "Напишите функцию sum_two(a, b), которая возвращает сумму двух чисел.",
+    "user_code": "def sum_two(a, b):\n return a + b\n",
+    "error": "IndentationError: unindent does not match any outer indentation level",
+    "hint": "В Python отступы показывают, что входит в тело функции. Все строки внутри sum_two должны быть выровнены одинаково — на один уровень глубже, чем def.",
+    "level_title": "Python / Начальный — уровень 1",
+    "difficulty_name": "Начальный",
+    "allowed_concepts": ["переменная", "функция", "return"]
+  },
+  {
+    "task_text": "Напишите функцию sum_two(a, b), которая возвращает сумму двух чисел.",
+    "user_code": "def sum_two():\n    return a + b\n",
+    "error": "TypeError: sum_two() takes 0 positional arguments but 2 were given",
+    "hint": "Тест передаёт два аргумента, а функция их не принимает. Сколько параметров указано в условии задачи и как их объявить в заголовке функции?",
+    "level_title": "Python / Начальный — уровень 1",
+    "difficulty_name": "Начальный",
+    "allowed_concepts": ["переменная", "функция", "return"]
+  },
+  {
+    "task_text": "Напишите функцию sum_two(a, b), которая возвращает сумму двух чисел.",
+    "user_code": "def sum_two(a, b):\n    result = a + b\n",
+    "error": "тесты не пройдены: получено None",
+    "hint": "Вы вычислили result, но функция ничего не отдаёт наружу. Как вернуть значение переменной вызывающему коду?",
+    "level_title": "Python / Начальный — уровень 1",
+    "difficulty_name": "Начальный",
+    "allowed_concepts": ["переменная", "функция", "return"]
+  },
+  {
+    "task_text": "Напишите функцию greet(name), которая возвращает строку «Привет, <name>!».",
+    "user_code": "def greet(name):\n    return 'Привет!'\n",
+    "error": "AssertionError: expected 'Привет, Анна!', got 'Привет!'",
+    "hint": "Приветствие есть, но имя не попало в результат. Как вставить значение параметра name внутрь строки?",
+    "level_title": "Python / Начальный — уровень 2",
+    "difficulty_name": "Начальный",
+    "allowed_concepts": ["переменная", "функция", "return"]
+  },
+  {
+    "task_text": "Напишите функцию greet(name), которая возвращает строку «Привет, <name>!».",
+    "user_code": "def greet(name):\n    return f'Привет, {name}'\n",
+    "error": "AssertionError: ожидался восклицательный знак в конце",
+    "hint": "Структура близка к верной. Сверьте результат с форматом из условия символ за символом — чего не хватает в конце строки?",
+    "level_title": "Python / Начальный — уровень 2",
+    "difficulty_name": "Начальный",
+    "allowed_concepts": ["переменная", "функция", "return"]
+  },
+  {
+    "task_text": "Напишите функцию multiply(a, b), возвращающую произведение двух чисел.",
+    "user_code": "def multiply(a, b):\n    return a + b\n",
+    "error": "AssertionError: expected 6, got 5",
+    "hint": "При a=2 и b=3 ожидается 6. Какая операция над парой чисел даёт произведение, а не сумму?",
+    "level_title": "Python / Начальный — уровень 3",
+    "difficulty_name": "Начальный",
+    "allowed_concepts": ["переменная", "функция", "return"]
+  },
+  {
+    "task_text": "Напишите функцию is_positive(n), которая возвращает True, если n > 0, иначе False.",
+    "user_code": "def is_positive(n):\n    if n > 0:\n        return True\n",
+    "error": "тесты не пройдены для отрицательных чисел",
+    "hint": "Для положительных n всё работает. Что должна вернуть функция, когда условие n > 0 ложно?",
+    "level_title": "Python / Начальный — уровень 4",
+    "difficulty_name": "Начальный",
+    "allowed_concepts": ["переменная", "функция", "return"]
+  },
+  {
+    "task_text": "Напишите функцию abs_value(n), возвращающую модуль числа (без if).",
+    "user_code": "def abs_value(n):\n    return n\n",
+    "error": "AssertionError: expected 5, got -5",
+    "hint": "Для отрицательного n результат остаётся отрицательным. Как из -5 получить 5, используя только арифметику?",
+    "level_title": "Python / Начальный — уровень 5",
+    "difficulty_name": "Начальный",
+    "allowed_concepts": ["переменная", "функция", "return"]
+  },
+  {
+    "task_text": "Напишите функцию last_element(items), возвращающую последний элемент списка.",
+    "user_code": "def last_element(items):\n    return items[0]\n",
+    "error": "AssertionError: expected 3, got 1",
+    "hint": "Вы берёте элемент с индексом 0 — это первый элемент. Какой индекс у последнего элемента непустого списка?",
+    "level_title": "Python / Средний — уровень 1",
+    "difficulty_name": "Средний",
+    "allowed_concepts": ["цикл", "условие", "список"]
+  },
+  {
+    "task_text": "Напишите функцию last_element(items), возвращающую последний элемент списка.",
+    "user_code": "def last_element(items):\n    return items[-1]\n",
+    "error": "IndexError: list index out of range",
+    "hint": "Индекс -1 работает для непустого списка. Что должна вернуть функция, если список пустой?",
+    "level_title": "Python / Средний — уровень 1",
+    "difficulty_name": "Средний",
+    "allowed_concepts": ["цикл", "условие", "список"]
+  },
+  {
+    "task_text": "Напишите функцию sum_list(nums), возвращающую сумму всех чисел списка.",
+    "user_code": "def sum_list(nums):\n    total = 0\n    for n in nums:\n        total = n\n    return total\n",
+    "error": "AssertionError: expected 10, got 4",
+    "hint": "На каждой итерации total заменяется текущим элементом, а не накапливается. Как прибавлять n к уже накопленной сумме?",
+    "level_title": "Python / Средний — уровень 2",
+    "difficulty_name": "Средний",
+    "allowed_concepts": ["цикл", "условие", "список"]
+  },
+  {
+    "task_text": "Напишите функцию sum_list(nums), возвращающую сумму всех чисел списка.",
+    "user_code": "def sum_list(nums):\n    for n in nums:\n        total += n\n    return total\n",
+    "error": "UnboundLocalError: local variable 'total' referenced before assignment",
+    "hint": "Переменная total используется до того, как получила начальное значение. С какого числа логично начать накопление суммы?",
+    "level_title": "Python / Средний — уровень 2",
+    "difficulty_name": "Средний",
+    "allowed_concepts": ["цикл", "условие", "список"]
+  },
+  {
+    "task_text": "Напишите функцию count_even(nums), которая считает чётные числа в списке.",
+    "user_code": "def count_even(nums):\n    count = 0\n    for n in nums:\n        if n % 2 == 0:\n            count += 1\n    return count\n",
+    "error": "тесты не пройдены для списка с отрицательными чётными",
+    "hint": "Логика с остатком от деления верная для положительных чисел. Чётность отрицательного числа тоже определяется через n % 2 — проверьте, не отфильтровываете ли вы лишние случаи.",
+    "level_title": "Python / Средний — уровень 3",
+    "difficulty_name": "Средний",
+    "allowed_concepts": ["цикл", "условие", "список"]
+  },
+  {
+    "task_text": "Напишите функцию find_max(nums), возвращающую максимальное число в списке.",
+    "user_code": "def find_max(nums):\n    max_val = 0\n    for n in nums:\n        if n > max_val:\n            max_val = n\n    return max_val\n",
+    "error": "AssertionError: expected -1, got 0",
+    "hint": "Начальное значение 0 больше любого отрицательного числа в списке. От чего лучше стартовать: от фиксированного нуля или от первого элемента списка?",
+    "level_title": "Python / Средний — уровень 4",
+    "difficulty_name": "Средний",
+    "allowed_concepts": ["цикл", "условие", "список"]
+  },
+  {
+    "task_text": "Напишите функцию reverse_list(items), возвращающую новый список в обратном порядке.",
+    "user_code": "def reverse_list(items):\n    items.reverse()\n    return items\n",
+    "error": "тест: исходный список изменился",
+    "hint": "Метод reverse меняет список на месте. Как получить новый список, не трогая исходный?",
+    "level_title": "Python / Средний — уровень 5",
+    "difficulty_name": "Средний",
+    "allowed_concepts": ["цикл", "условие", "список"]
+  },
+  {
+    "task_text": "Напишите функцию unique_items(items), возвращающую список без повторов (порядок сохранить).",
+    "user_code": "def unique_items(items):\n    return list(set(items))\n",
+    "error": "AssertionError: порядок элементов не совпал",
+    "hint": "Множество set убирает дубликаты, но не гарантирует исходный порядок. Как пройти список один раз и добавлять элемент только если его ещё не было?",
+    "level_title": "Python / Средний — уровень 5",
+    "difficulty_name": "Средний",
+    "allowed_concepts": ["цикл", "условие", "список"]
+  },
+  {
+    "task_text": "Напишите функцию is_palindrome(s), проверяющую, читается ли строка одинаково слева направо и справа налево.",
+    "user_code": "def is_palindrome(s):\n    return s == s.sort()\n",
+    "error": "AttributeError: 'str' object has no attribute 'sort'",
+    "hint": "sort есть у списков, не у строк. Как сравнить строку с её зеркальным отражением?",
+    "level_title": "Python / Продвинутый — уровень 1",
+    "difficulty_name": "Продвинутый",
+    "allowed_concepts": ["класс", "исключение", "алгоритм"]
+  },
+  {
+    "task_text": "Напишите функцию is_palindrome(s), проверяющую, читается ли строка одинаково слева направо и справа налево.",
+    "user_code": "def is_palindrome(s):\n    return s == reversed(s)\n",
+    "error": "тесты не пройдены",
+    "hint": "reversed(s) возвращает итератор, а не строку. Как превратить перевёр последовательность символов обратно в строку для сравнения?",
+    "level_title": "Python / Продвинутый — уровень 1",
+    "difficulty_name": "Продвинутый",
+    "allowed_concepts": ["класс", "исключение", "алгоритм"]
+  },
+  {
+    "task_text": "Реализуйте класс Counter с методами increment() и value(), возвращающим текущий счётчик.",
+    "user_code": "class Counter:\n    count = 0\n    def increment(self):\n        count += 1\n",
+    "error": "UnboundLocalError: local variable 'count' referenced before assignment",
+    "hint": "count += 1 создаёт локальную переменную в методе. Как обратиться к атрибуту экземпляра, а не к локальному имени?",
+    "level_title": "Python / Продвинутый — уровень 2",
+    "difficulty_name": "Продвинутый",
+    "allowed_concepts": ["класс", "исключение", "алгоритм"]
+  },
+  {
+    "task_text": "Реализуйте класс Counter с методами increment() и value(), возвращающим текущий счётчик.",
+    "user_code": "class Counter:\n    def __init__(self):\n        self.count = 0\n    def increment(self):\n        self.count += 1\n",
+    "error": "AttributeError: 'Counter' object has no attribute 'value'",
+    "hint": "increment работает, но тест вызывает value(). Какой метод должен просто вернуть текущее значение счётчика?",
+    "level_title": "Python / Продвинутый — уровень 2",
+    "difficulty_name": "Продвинутый",
+    "allowed_concepts": ["класс", "исключение", "алгоритм"]
+  },
+  {
+    "task_text": "Напишите функцию parse_int(text), которая возвращает число или None при ошибке.",
+    "user_code": "def parse_int(text):\n    return int(text)\n",
+    "error": "ValueError: invalid literal for int()",
+    "hint": "int(text) падает на «abc». Как попытаться преобразовать строку и при ошибке вернуть None вместо исключения?",
+    "level_title": "Python / Продвинутый — уровень 3",
+    "difficulty_name": "Продвинутый",
+    "allowed_concepts": ["класс", "исключение", "алгоритм"]
+  },
+  {
+    "task_text": "Напишите функцию binary_search(nums, target), возвращающую индекс target или -1.",
+    "user_code": "def binary_search(nums, target):\n    for i, n in enumerate(nums):\n        if n == target:\n            return i\n    return -1\n",
+    "error": "тест: превышен лимит времени на большом списке",
+    "hint": "Линейный перебор находит элемент, но медленно. Как использовать то, что список отсортирован, и каждый раз отбрасывать половину диапазона?",
+    "level_title": "Python / Продвинутый — уровень 4",
+    "difficulty_name": "Продвинутый",
+    "allowed_concepts": ["класс", "исключение", "алгоритм"]
+  },
+  {
+    "task_text": "Напишите функцию merge_sorted(a, b), объединяющую два отсортированных списка в один отсортированный.",
+    "user_code": "def merge_sorted(a, b):\n    return sorted(a + b)\n",
+    "error": "тест: решение принято, но требуется алгоритм слияния",
+    "hint": "sorted(a + b) работает, но задача про два указателя. Как сравнивать текущие элементы a и b и брать меньший, не сортируя весь список заново?",
+    "level_title": "Python / Продвинутый — уровень 5",
+    "difficulty_name": "Продвинутый",
+    "allowed_concepts": ["класс", "исключение", "алгоритм"]
+  },
+  {
+    "task_text": "Напишите функцию add(a, b), возвращающую сумму двух чисел (JavaScript).",
+    "user_code": "function add(a, b) {\n  return a + b;\n}\n",
+    "error": "тесты не пройдены: '12' вместо 3",
+    "hint": "В JavaScript оператор + иногда склеивает строки. Как убедиться, что a и b treated as числа перед сложением?",
+    "level_title": "JavaScript / Начальный — уровень 1",
+    "difficulty_name": "Начальный",
+    "allowed_concepts": ["переменная", "функция", "return"]
+  },
+  {
+    "task_text": "Напишите функцию add(a, b), возвращающую сумму двух чисел (JavaScript).",
+    "user_code": "function add(a, b) {\n  console.log(a + b);\n}\n",
+    "error": "тесты не пройдены: undefined",
+    "hint": "console.log выводит в консоль, но не возвращает значение функции. Чем return отличается от console.log?",
+    "level_title": "JavaScript / Начальный — уровень 1",
+    "difficulty_name": "Начальный",
+    "allowed_concepts": ["переменная", "функция", "return"]
+  },
+  {
+    "task_text": "Напишите функцию filterPositive(nums), возвращающую массив только положительных чисел.",
+    "user_code": "function filterPositive(nums) {\n  for (let n of nums) {\n    if (n > 0) return n;\n  }\n}\n",
+    "error": "тест: ожидался массив, получено число",
+    "hint": "Вы возвращаете одно число при первом совпадении. Как собрать все подходящие элементы в новый массив?",
+    "level_title": "JavaScript / Средний — уровень 2",
+    "difficulty_name": "Средний",
+    "allowed_concepts": ["цикл", "условие", "список"]
+  },
+  {
+    "task_text": "Напишите метод Sum(int a, int b) в C#, возвращающий сумму.",
+    "user_code": "public int Sum(int a, int b) {\n    return a + b;\n}\n",
+    "error": "CS1519: Invalid token 'return' in class",
+    "hint": "Метод объявлен вне класса. В C# методы должны находиться внутри class — где в вашем файле объявлен класс-обёртка?",
+    "level_title": "C# / Начальный — уровень 1",
+    "difficulty_name": "Начальный",
+    "allowed_concepts": ["переменная", "функция", "return"]
+  },
+  {
+    "task_text": "Напишите метод Sum(int a, int b) в C#, возвращающий сумму.",
+    "user_code": "public int Sum(int a, int b) {\n    Console.WriteLine(a + b);\n}\n",
+    "error": "CS0161: not all code paths return a value",
+    "hint": "WriteLine печатает, но метод объявлен с типом int — что должно вернуться вызывающему коду?",
+    "level_title": "C# / Начальный — уровень 1",
+    "difficulty_name": "Начальный",
+    "allowed_concepts": ["переменная", "функция", "return"]
+  },
+  {
+    "task_text": "Напишите функцию array_sum($nums) в PHP, возвращающую сумму массива.",
+    "user_code": "function array_sum($nums) {\n    $total = 0;\n    foreach ($nums as $n) {\n        $total = $n;\n    }\n    return $total;\n}\n",
+    "error": "AssertionError: expected 15, got 5",
+    "hint": "На каждой итерации total перезаписывается, а не накапливается. Как прибавить n к total?",
+    "level_title": "PHP / Средний — уровень 2",
+    "difficulty_name": "Средний",
+    "allowed_concepts": ["цикл", "условие", "список"]
+  },
+  {
+    "task_text": "Напишите статический метод sum(int a, int b) в Java.",
+    "user_code": "public static int sum(int a, int b) {\n    return a + b\n}",
+    "error": "';' expected",
+    "hint": "В Java каждая инструкция завершается особым символом. Чего не хватает в конце строки с return?",
+    "level_title": "Java / Начальный — уровень 1",
+    "difficulty_name": "Начальный",
+    "allowed_concepts": ["переменная", "function", "return"]
+  },
+  {
+    "task_text": "Напишите статический метод sum(int a, int b) в Java.",
+    "user_code": "public static int sum(int a, int b) {\n    System.out.println(a + b);\n}\n",
+    "error": "missing return statement",
+    "hint": "println выводит в консоль, но метод объявлен как int. Что нужно вернуть вызывающему коду?",
+    "level_title": "Java / Начальный — уровень 1",
+    "difficulty_name": "Начальный",
+    "allowed_concepts": ["переменная", "функция", "return"]
+  },
+  {
+    "task_text": "Экзаменационный вопрос: реализуйте функцию exam_answer(), возвращающую True.",
+    "user_code": "def exam_answer():\n    return False\n",
+    "error": "тесты не пройдены",
+    "hint": "Условие просит True. Какое логическое значение соответствует «да, условие выполнено»?",
+    "level_title": "Python — экзамен",
+    "difficulty_name": "Средний",
+    "allowed_concepts": ["переменная", "функция", "return"],
+    "exam_mode": true
+  },
+  {
+    "task_text": "Напишите функцию sum_two(a, b), которая возвращает сумму двух чисел.",
+    "user_code": "def sum_two(a, b):\n    pass\n",
+    "error": "тесты не пройдены: получено None",
+    "hint": "Заглушка pass не даёт результата. Какое выражение вернёт сумму a и b?",
+    "level_title": "Python — экзамен",
+    "difficulty_name": "Начальный",
+    "allowed_concepts": ["переменная", "функция", "return"],
+    "exam_mode": true
+  },
+  {
+    "task_text": "Напишите функцию count_vowels(s), считающую гласные буквы в строке.",
+    "user_code": "def count_vowels(s):\n    count = 0\n    for ch in s:\n        if ch in 'aeiou':\n            count += 1\n    return count\n",
+    "error": "AssertionError: expected 2 for 'Привет'",
+    "hint": "Вы проверяете только латинские гласные. Как учесть русские буквы в условии задачи?",
+    "level_title": "Python / Средний — уровень 3",
+    "difficulty_name": "Средний",
+    "allowed_concepts": ["цикл", "условие", "список"]
+  },
+  {
+    "task_text": "Напишите функцию fizz_buzz(n), возвращающую список строк от 1 до n по правилам FizzBuzz.",
+    "user_code": "def fizz_buzz(n):\n    result = []\n    for i in range(n):\n        result.append(str(i))\n    return result\n",
+    "error": "AssertionError: expected '1', got '0'",
+    "hint": "range(n) начинается с 0 и не включает n. Как получить числа от 1 до n включительно?",
+    "level_title": "Python / Средний — уровень 4",
+    "difficulty_name": "Средний",
+    "allowed_concepts": ["цикл", "условие", "список"]
+  },
+  {
+    "task_text": "Напишите функцию fizz_buzz(n), возвращающую список строк от 1 до n по правилам FizzBuzz.",
+    "user_code": "def fizz_buzz(n):\n    result = []\n    for i in range(1, n + 1):\n        result.append(str(i))\n    return result\n",
+    "error": "AssertionError: expected 'Fizz' for 3",
+    "hint": "Числа выводятся правильно, но не применяются правила кратности 3 и 5. При каких i нужно заменить число на Fizz или Buzz?",
+    "level_title": "Python / Средний — уровень 4",
+    "difficulty_name": "Средний",
+    "allowed_concepts": ["цикл", "условие", "список"]
+  },
+  {
+    "task_text": "Напишите функцию remove_duplicates(s), удаляющую повторяющиеся символы строки.",
+    "user_code": "def remove_duplicates(s):\n    return s.replace(s[0], '')\n",
+    "error": "AssertionError: строка стала пустой",
+    "hint": "replace удаляет все вхождения символа сразу. Как пройти строку и оставить символ только при первом появлении?",
+    "level_title": "Python / Средний — уровень 5",
+    "difficulty_name": "Средний",
+    "allowed_concepts": ["цикл", "условие", "список"]
+  },
+  {
+    "task_text": "Напишите функцию matrix_sum(m), возвращающую сумму всех элементов матрицы (список списков).",
+    "user_code": "def matrix_sum(m):\n    return sum(m)\n",
+    "error": "TypeError: unsupported operand type(s)",
+    "hint": "sum(m) пытается сложить строки матрицы как числа. Как пройти каждую строку и каждый элемент внутри неё?",
+    "level_title": "Python / Продвинутый — уровень 3",
+    "difficulty_name": "Продвинутый",
+    "allowed_concepts": ["класс", "исключение", "алгоритм"]
+  },
+  {
+    "task_text": "Напишите функцию validate_password(p), возвращающую True, если длина >= 8.",
+    "user_code": "def validate_password(p):\n    if len(p) > 8:\n        return True\n    return False\n",
+    "error": "AssertionError: пароль из 8 символов не принят",
+    "hint": "Условие говорит «не меньше 8». Чем оператор >= отличается от > для ровно восьми символов?",
+    "level_title": "Python / Средний — уровень 2",
+    "difficulty_name": "Средний",
+    "allowed_concepts": ["цикл", "условие", "список"]
+  },
+  {
+    "task_text": "Напишите функцию average(nums), возвращающую среднее арифметическое (0 для пустого списка).",
+    "user_code": "def average(nums):\n    return sum(nums) / len(nums)\n",
+    "error": "ZeroDivisionError: division by zero",
+    "hint": "При пустом списке len(nums) равен нулю. Что вернуть до деления, если элементов нет?",
+    "level_title": "Python / Средний — уровень 3",
+    "difficulty_name": "Средний",
+    "allowed_concepts": ["цикл", "условие", "список"]
+  },
+  {
+    "task_text": "Напишите функцию pair_sum(nums, target), возвращающую True, если есть два числа с суммой target.",
+    "user_code": "def pair_sum(nums, target):\n    for i in range(len(nums)):\n        if nums[i] + nums[i] == target:\n            return True\n    return False\n",
+    "error": "AssertionError: expected True for [1, 2, 3], target=5",
+    "hint": "Вы складываете элемент сам с собой. Как взять два разных индекса i и j?",
+    "level_title": "Python / Продвинутый — уровень 4",
+    "difficulty_name": "Продвинутый",
+    "allowed_concepts": ["класс", "исключение", "алгоритм"]
+  },
+  {
+    "task_text": "Напишите функцию sum_two(a, b), которая возвращает сумму двух чисел.",
+    "user_code": "def sum_two(a, b):\n    # я запутался",
+    "error": "я не знаю что писать дальше, помогите",
+    "hint": "Не волнуйтесь, это нормально! Нам нужно сложить два числа (a и b) и отдать результат. Какое ключевое слово используется для возврата значения? Напишите return и сложите переменные.",
+    "level_title": "Python / Начальный — уровень 1",
+    "difficulty_name": "Начальный",
+    "allowed_concepts": ["переменная", "функция", "return"]
+  },
+  {
+    "task_text": "Напишите функцию sum_two(a, b), которая возвращает сумму двух чисел.",
+    "user_code": "",
+    "error": "не понимаю задание, с чего начать?",
+    "hint": "Давайте начнем с объявления самой функции. В Python функция объявляется так: `def sum_two(a, b):`. Попробуйте написать эту строчку и нажать Enter. Справитесь?",
+    "level_title": "Python / Начальный — уровень 1",
+    "difficulty_name": "Начальный",
+    "allowed_concepts": ["переменная", "функция", "return"]
+  },
+  {
+    "task_text": "Напишите функцию greet(name), которая возвращает строку «Привет, <name>!».",
+    "user_code": "def greet(name):\n    # как вставить name?",
+    "error": "я не знаю как вставить переменную в строку",
+    "hint": "В Python для этого удобно использовать f-строки. Они начинаются с буквы f перед кавычками, например: `f'Текст {переменная}'`. Попробуйте обернуть имя в фигурные скобки внутри приветствия.",
+    "level_title": "Python / Начальный — уровень 2",
+    "difficulty_name": "Начальный",
+    "allowed_concepts": ["переменная", "функция", "return"]
+  },
+  {
+    "task_text": "Напишите функцию sum_list(nums), возвращающую сумму всех чисел списка.",
+    "user_code": "def sum_list(nums):\n    # как сложить список?",
+    "error": "я запутался в циклах, что делать?",
+    "hint": "Для перебора списка используйте цикл `for n in nums:`. Создайте перед этим переменную `total = 0`, чтобы прибавлять к ней каждое число. Попробуйте написать структуру цикла.",
+    "level_title": "Python / Средний — уровень 2",
+    "difficulty_name": "Средний",
+    "allowed_concepts": ["цикл", "условие", "список"]
+  },
+  {
+    "task_text": "Напишите функцию validate_password(p), возвращающую True, если длина >= 8.",
+    "user_code": "def validate_password(p):\n    # как узнать длину?",
+    "error": "я не знаю как получить длину строки",
+    "hint": "В Python есть встроенная функция `len(s)`, которая возвращает длину строки или списка. Сравните результат `len(p)` с числом 8 с помощью оператора `>=`.",
+    "level_title": "Python / Средний — уровень 2",
+    "difficulty_name": "Средний",
+    "allowed_concepts": ["цикл", "условие", "список"]
+  }
+]
