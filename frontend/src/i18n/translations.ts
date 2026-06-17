@@ -130,6 +130,8 @@ export const translations = {
       final:            { ru: "Итоговый",            en: "Final",                 kz: "Қорытынды" },
     },
     activatePro:    { ru: "Активировать PRO",        en: "Activate PRO",          kz: "PRO белсендіру" },
+    completed:      { ru: "Сдан",                    en: "Passed",                kz: "Өтті" },
+    scoreResult:    { ru: "Лучший результат:",       en: "Best score:",           kz: "Ең жақсы нәтиже:" },
   },
 
   // ── Exam Session ────────────────────────────────────────────

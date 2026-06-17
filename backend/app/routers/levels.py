@@ -12,6 +12,7 @@ from app.services.progress_service import (
     ensure_first_level_open,
     get_progress_map,
     mark_level_completed,
+    reconcile_track_unlocks,
 )
 
 router = APIRouter(prefix="/levels", tags=["levels"])
@@ -31,6 +32,7 @@ async def level_map(
     db: AsyncSession = Depends(get_db),
 ):
     await ensure_first_level_open(db, user.id, track_id)
+    await reconcile_track_unlocks(db, user.id, track_id)
     await db.commit()
 
     result = await db.execute(

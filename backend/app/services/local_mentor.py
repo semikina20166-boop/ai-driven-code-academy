@@ -45,9 +45,6 @@ def get_local_hint(
     task = _normalize(task_text)
     hints: list[str] = []
 
-    if "sum_two" in task or "sum_two" in code:
-        hints.extend(_sum_two_hints(err, code, allowed_concepts))
-
     # General Socratic guidance for confused users
     if any(k in err or k in code.lower() for k in ["не знаю", "запутался", "помогите", "что делать", "как решить", "не понимаю", "сложно", "хелп"]):
         hints.append(
@@ -70,7 +67,7 @@ def get_local_hint(
 
     if "nameerror" in err or "is not defined" in err:
         hints.append(
-            "Используется имя, которое Python пока не знает. Это имя параметра, локальная переменная "
+            "Используется имя, которое программа пока не знает. Это имя параметра, локальная переменная "
             "или опечатка в уже объявленном идентификаторе?"
         )
 
@@ -88,7 +85,7 @@ def get_local_hint(
 
     if "indentationerror" in err:
         hints.append(
-            "Отступы в Python задают вложенность блоков. Все строки внутри функции выровнены одинаково "
+            "Отступы задают вложенность блоков. Все строки внутри функции выровнены одинаково "
             "относительно её объявления?"
         )
 
@@ -98,17 +95,22 @@ def get_local_hint(
             "«для каждого», «пока» или «перебрать»?"
         )
 
-    if _mentions_concept(allowed_concepts, "условие") and "if " not in code:
+    if _mentions_concept(allowed_concepts, "условие", "оператор") and ("if " not in code and "?" not in code):
         hints.append(
             "Возможно, нужна развилка: разные входные данные требуют разной логики. "
             "При каких случаях поведение функции должно отличаться?"
         )
 
-    if _mentions_concept(allowed_concepts, "список") and "[" not in code:
+    if _mentions_concept(allowed_concepts, "список", "массив") and ("[" not in code and "Array" not in code):
         hints.append(
-            "Работа со списком обычно начинается с понимания, что в нём хранится и как пройти по элементам. "
+            "Работа с массивом обычно начинается с понимания, что в нём хранится и как пройти по элементам. "
             "Что является одним элементом в вашей задаче?"
         )
+
+    if _mentions_concept(allowed_concepts, "рекурсия"):
+        # simple heuristic for recursion
+        if "return" in code and "def " not in code.split("return")[-1]:
+            pass
 
     if not hints:
         hints.append(
@@ -118,38 +120,3 @@ def get_local_hint(
         )
 
     return _pick_hint(hints, exam_mode)
-
-
-def _sum_two_hints(err: str, code: str, concepts: list[str]) -> list[str]:
-    hints: list[str] = []
-
-    if "pass" in code:
-        hints.append(
-            "В теле функции остался заглушечный pass. Какое выражение с двумя параметрами "
-            "даст сумму, если использовать только return?"
-        )
-
-    if "print" in code and "return" not in code:
-        hints.append(
-            "print выводит текст в консоль, но тест проверяет возвращаемое значение функции. "
-            "Чем отличается «показать результат» от «вернуть результат»?"
-        )
-
-    if re.search(r"\+\s*['\"]", code) or re.search(r"['\"].*\+", code):
-        hints.append(
-            "Сложение строк и сложение чисел в Python — разные операции. "
-            "Какой тип данных ожидается у параметров a и b?"
-        )
-
-    if "return" in concepts or _mentions_concept(concepts, "return", "функция"):
-        hints.append(
-            "Функция sum_two принимает два аргумента. Какое арифметическое действие "
-            "превращает пару чисел в их сумму?"
-        )
-
-    if not hints:
-        hints.append(
-            "Подставьте конкретные числа из условия: что вернёт функция сейчас и что должна вернуть?"
-        )
-
-    return hints

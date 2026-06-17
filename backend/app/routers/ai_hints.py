@@ -42,11 +42,11 @@ async def request_hint(body: AiHintRequest, user: CurrentUser, db: AsyncSession 
         await db.commit()
 
     hint = await get_hint(
-        task_text=level.task_text,
+        task_text=level.task_text_ru,
         user_code=body.code,
-        error_message=body.error_message,
+        error_message=body.error_message or "",
         difficulty_name=level.difficulty.name_ru,
-        level_title=level.title,
+        level_title=level.title_ru,
         allowed_concepts=list(level.allowed_concepts or []),
     )
     return AiHintResponse(hint=hint)
@@ -75,9 +75,9 @@ async def request_review(body: CodeReviewRequest, user: CurrentUser, db: AsyncSe
         )
 
     review = await get_code_review(
-        task_text=level.task_text,
+        task_text=level.task_text_ru,
         user_code=body.code,
         difficulty_name=level.difficulty.name_ru,
-        level_title=level.title,
+        level_title=level.title_ru,
     )
     return CodeReviewResponse(review=review)

@@ -4,6 +4,7 @@ import { ArrowLeft, Loader2 } from "lucide-react";
 import { api } from "../api/client";
 import type { LevelMapItem, Track } from "../api/types";
 import { LevelMap } from "../components/LevelMap";
+import { ReviewsSection } from "../components/ReviewsSection";
 
 export function TrackPage() {
   const { trackId } = useParams<{ trackId: string }>();
@@ -45,6 +46,13 @@ export function TrackPage() {
       <h1 className="text-2xl font-bold mb-1">{track?.language?.name ?? "Трек"}</h1>
       <p className="text-academy-muted mb-8">Карта уровней — выберите доступный этап</p>
       <LevelMap trackId={id} levels={levels} />
+
+      {/* Divider */}
+      <div className="border-t border-academy-border/40 mt-10" />
+
+      {/* Reviews section */}
+      <ReviewsSection trackId={id} />
     </div>
   );
 }
+

@@ -97,7 +97,7 @@ def main() -> None:
         args=training_args,
         train_dataset=dataset,
         processing_class=tokenizer,
-        max_seq_length=MAX_SEQ_LENGTH,
+        
     )
     trainer.train()
     trainer.model.save_pretrained(OUTPUT_DIR)

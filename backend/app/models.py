@@ -193,3 +193,40 @@ class UserSelectedTracksForExam(Base):
     exam_id: Mapped[int] = mapped_column(ForeignKey("exams.id"), primary_key=True)
     track_ids: Mapped[list[int]] = mapped_column(ARRAY(Integer))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+
+class CourseReview(Base):
+    """Отзыв пользователя о курсе (треке). Один отзыв на пользователя на трек."""
+
+    __tablename__ = "course_reviews"
+    __table_args__ = (UniqueConstraint("user_id", "track_id"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("users.id"))
+    track_id: Mapped[int] = mapped_column(ForeignKey("tracks.id"))
+    rating: Mapped[int] = mapped_column(SmallInteger)  # 1–5
+    comment: Mapped[str | None] = mapped_column(Text, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    updated_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+
+    user: Mapped["User"] = relationship()
+    track: Mapped["Track"] = relationship()
+
+
+class ExamReview(Base):
+    """Отзыв пользователя об экзамене. Один отзыв на пользователя на экзамен."""
+
+    __tablename__ = "exam_reviews"
+    __table_args__ = (UniqueConstraint("user_id", "exam_id"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("users.id"))
+    exam_id: Mapped[int] = mapped_column(ForeignKey("exams.id"))
+    rating: Mapped[int] = mapped_column(SmallInteger)  # 1–5
+    comment: Mapped[str | None] = mapped_column(Text, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    updated_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+
+    user: Mapped["User"] = relationship()
+    exam: Mapped["Exam"] = relationship()
+

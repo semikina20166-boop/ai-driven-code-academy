@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { BookOpen, Clock, Loader2, Lock, Unlock, Crown } from "lucide-react";
+import { BookOpen, Clock, Loader2, Lock, Unlock, Crown, CheckCircle2 } from "lucide-react";
 import { api } from "../api/client";
 import { useAuth } from "../context/AuthContext";
 import { useI18n, tx } from "../i18n/I18nContext";
@@ -123,6 +123,11 @@ export function ExamsPage() {
                       {exam.time_limit_min} {tx(t.exams.minutesShort, lang)}
                     </span>
                   )}
+                  {exam.passed && exam.best_score != null && (
+                    <span className="text-academy-success">
+                      {tx(t.exams.scoreResult, lang)} {exam.best_score}%
+                    </span>
+                  )}
                 </div>
               </div>
 
@@ -134,6 +139,11 @@ export function ExamsPage() {
                   <Crown className="w-4 h-4 fill-academy-bg" />
                   {tx(t.exams.activatePro, lang)}
                 </Link>
+              ) : exam.passed ? (
+                <span className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg border border-academy-success/40 bg-academy-success/10 text-academy-success text-sm font-medium shrink-0 w-full sm:w-auto">
+                  <CheckCircle2 className="w-4 h-4" />
+                  {tx(t.exams.completed, lang)}
+                </span>
               ) : exam.available ? (
                 <Link
                   to={`/exams/${exam.id}/session`}

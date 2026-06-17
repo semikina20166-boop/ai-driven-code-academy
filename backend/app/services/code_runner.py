@@ -25,7 +25,7 @@ import traceback
 {user_code}
 
 def _run_tests():
-    cases = {cases_json}
+    cases = json.loads({repr(cases_json)})
     fn_name = {fn_name}
     fn = globals().get(fn_name)
     if not callable(fn):
@@ -48,6 +48,7 @@ def _run_tests():
     return {{"passed": passed, "stdout": "", "stderr": "", "details": details}}
 
 if __name__ == "__main__":
+    import json
     print(json.dumps(_run_tests()))
 '''
 

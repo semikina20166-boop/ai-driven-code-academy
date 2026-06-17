@@ -30,13 +30,36 @@ from app.services.progress_service import count_completed_in_block, progress_sum
 router = APIRouter(prefix="/exams", tags=["exams"])
 
 
+async def _get_exam_attempt_stats(db: AsyncSession, user_id, exam_id: int) -> tuple[bool, int | None, int]:
+    attempts_q = await db.execute(
+        select(UserExamAttempt).where(
+            UserExamAttempt.user_id == user_id,
+            UserExamAttempt.exam_id == exam_id,
+        )
+    )
+    attempts = attempts_q.scalars().all()
+    finished = [a for a in attempts if a.finished_at is not None]
+    passed = any(a.passed for a in finished if a.passed is not None)
+    scores = [a.score for a in finished if a.score is not None]
+    best_score = max(scores) if scores else None
+    return passed, best_score, len(attempts)
+
+
 def _pick(ru: str, en: str, kz: str, lang: str) -> str:
     ru = ru or ""
     m = {"ru": ru, "en": en or ru, "kz": kz or ru}
     return m.get(lang, ru)
 
 
-def _exam_out(exam: Exam, available: bool, lang: str) -> ExamOut:
+def _exam_out(
+    exam: Exam,
+    available: bool,
+    lang: str,
+    *,
+    passed: bool = False,
+    best_score: int | None = None,
+    attempts_used: int = 0,
+) -> ExamOut:
     title_ru = exam.title_ru or ""
     title_en = exam.title_en or title_ru
     title_kz = exam.title_kz or title_ru
@@ -57,6 +80,9 @@ def _exam_out(exam: Exam, available: bool, lang: str) -> ExamOut:
         pass_percent=exam.pass_percent,
         time_limit_min=exam.time_limit_min,
         available=available,
+        passed=passed,
+        best_score=best_score,
+        attempts_used=attempts_used,
     )
 
 
@@ -87,7 +113,8 @@ async def available_exams(
         elif exam.exam_type == ExamType.final:
             available = total_completed >= 30
 
-        out.append(_exam_out(exam, available, lang))
+        passed, best_score, attempts_used = await _get_exam_attempt_stats(db, user.id, exam.id)
+        out.append(_exam_out(exam, available, lang, passed=passed, best_score=best_score, attempts_used=attempts_used))
     return out
 
 

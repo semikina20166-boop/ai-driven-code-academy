@@ -98,6 +98,9 @@ export interface Exam {
   pass_percent: number;
   time_limit_min: number | null;
   available: boolean;
+  passed: boolean;
+  best_score: number | null;
+  attempts_used: number;
 }
 
 export interface ExamQuestion {
@@ -139,3 +142,76 @@ export function pickLang<T extends Record<string, unknown>>(
     fallback
   );
 }
+
+// ── Отзывы о курсах ──────────────────────────────────────────────────────────
+
+export interface Review {
+  id: number;
+  user_id: string;
+  display_name: string | null;
+  track_id: number;
+  rating: number;
+  comment: string | null;
+  created_at: string;
+  updated_at: string | null;
+  is_own: boolean;
+}
+
+export interface ReviewCreate {
+  rating: number;
+  comment?: string | null;
+}
+
+export interface TrackReviewsData {
+  track_id: number;
+  average_rating: number | null;
+  total_reviews: number;
+  reviews: Review[];
+  can_review: boolean;
+  my_review: Review | null;
+}
+
+export interface ExamReview {
+  id: number;
+  user_id: string;
+  display_name: string | null;
+  exam_id: number;
+  rating: number;
+  comment: string | null;
+  created_at: string;
+  updated_at: string | null;
+  is_own: boolean;
+}
+
+export interface ExamReviewsData {
+  exam_id: number;
+  average_rating: number | null;
+  total_reviews: number;
+  reviews: ExamReview[];
+  can_review: boolean;
+  my_review: ExamReview | null;
+}
+
+export interface TrackReviewSummary {
+  track_id: number;
+  track_title: string;
+  average_rating: number | null;
+  total_reviews: number;
+  reviews: Review[];
+}
+
+export interface ExamReviewSummary {
+  exam_id: number;
+  exam_title: string;
+  exam_type: string;
+  average_rating: number | null;
+  total_reviews: number;
+  reviews: ExamReview[];
+}
+
+export interface AllReviewsData {
+  tracks: TrackReviewSummary[];
+  exams: ExamReviewSummary[];
+  total_reviews: number;
+}
+

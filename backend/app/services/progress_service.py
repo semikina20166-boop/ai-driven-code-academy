@@ -39,6 +39,14 @@ async def ensure_first_level_open(db: AsyncSession, user_id: UUID, track_id: int
     )
 
 
+async def _open_level(db: AsyncSession, user_id: UUID, level_id: int) -> None:
+    prog = await db.get(UserProgress, {"user_id": user_id, "level_id": level_id})
+    if not prog:
+        db.add(UserProgress(user_id=user_id, level_id=level_id, status=ProgressStatus.open, attempts=0))
+    elif prog.status == ProgressStatus.locked:
+        prog.status = ProgressStatus.open
+
+
 async def unlock_next_level(
     db: AsyncSession,
     user_id: UUID,
@@ -52,14 +60,49 @@ async def unlock_next_level(
         )
     )
     nxt = nq.scalar_one_or_none()
-    if not nxt:
+    if nxt:
+        await _open_level(db, user_id, nxt.id)
         return
 
-    np = await db.get(UserProgress, {"user_id": user_id, "level_id": nxt.id})
-    if not np:
-        db.add(UserProgress(user_id=user_id, level_id=nxt.id, status=ProgressStatus.open, attempts=0))
-    elif np.status == ProgressStatus.locked:
-        np.status = ProgressStatus.open
+    diff_q = await db.execute(select(Difficulty).where(Difficulty.id == level.difficulty_id))
+    current_diff = diff_q.scalar_one_or_none()
+    if not current_diff:
+        return
+
+    next_diff_q = await db.execute(
+        select(Difficulty).where(Difficulty.sort_order == current_diff.sort_order + 1)
+    )
+    next_diff = next_diff_q.scalar_one_or_none()
+    if not next_diff:
+        return
+
+    first_q = await db.execute(
+        select(Level).where(
+            Level.track_id == level.track_id,
+            Level.difficulty_id == next_diff.id,
+            Level.order_num == 1,
+        )
+    )
+    first_of_next = first_q.scalar_one_or_none()
+    if first_of_next:
+        await _open_level(db, user_id, first_of_next.id)
+
+
+async def reconcile_track_unlocks(db: AsyncSession, user_id: UUID, track_id: int) -> None:
+    """Repair unlock chain for users who completed levels before cross-difficulty unlock existed."""
+    completed_q = await db.execute(
+        select(Level)
+        .join(UserProgress, UserProgress.level_id == Level.id)
+        .join(Difficulty, Difficulty.id == Level.difficulty_id)
+        .where(
+            UserProgress.user_id == user_id,
+            UserProgress.status == ProgressStatus.completed,
+            Level.track_id == track_id,
+        )
+        .order_by(Difficulty.sort_order, Level.order_num)
+    )
+    for level in completed_q.scalars().all():
+        await unlock_next_level(db, user_id, level)
 
 
 async def mark_level_completed(

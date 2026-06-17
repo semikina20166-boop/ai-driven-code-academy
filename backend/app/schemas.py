@@ -166,6 +166,9 @@ class ExamOut(BaseModel):
     pass_percent: int
     time_limit_min: int | None
     available: bool = False
+    passed: bool = False
+    best_score: int | None = None
+    attempts_used: int = 0
 
 
 class ExamQuestionOut(BaseModel):
@@ -223,3 +226,85 @@ class TrackLecturesOut(BaseModel):
     language_code: str
     language_name: str
     levels: list[LectureLevelOut]
+
+
+# ── Отзывы о курсах ────────────────────────────────────────────────────────────
+
+class ReviewCreate(BaseModel):
+    rating: int = Field(ge=1, le=5)
+    comment: str | None = Field(default=None, max_length=2000)
+
+
+class ReviewOut(BaseModel):
+    id: int
+    user_id: str
+    display_name: str | None
+    track_id: int
+    rating: int
+    comment: str | None
+    created_at: datetime
+    updated_at: datetime | None
+    is_own: bool = False
+
+    model_config = {"from_attributes": True}
+
+
+class TrackReviewsOut(BaseModel):
+    track_id: int
+    average_rating: float | None
+    total_reviews: int
+    reviews: list[ReviewOut]
+    can_review: bool = False
+    my_review: ReviewOut | None = None
+
+
+# ── Отзывы об экзаменах ─────────────────────────────────────────────────────────
+
+class ExamReviewOut(BaseModel):
+    id: int
+    user_id: str
+    display_name: str | None
+    exam_id: int
+    rating: int
+    comment: str | None
+    created_at: datetime
+    updated_at: datetime | None
+    is_own: bool = False
+
+    model_config = {"from_attributes": True}
+
+
+class ExamReviewsOut(BaseModel):
+    exam_id: int
+    average_rating: float | None
+    total_reviews: int
+    reviews: list[ExamReviewOut]
+    can_review: bool = False   # True если пользователь сдал экзамен
+    my_review: ExamReviewOut | None = None
+
+
+# ── Общая страница всех отзывов ─────────────────────────────────────────────────
+
+class TrackReviewSummary(BaseModel):
+    track_id: int
+    track_title: str
+    average_rating: float | None
+    total_reviews: int
+    reviews: list[ReviewOut]
+
+
+class ExamReviewSummary(BaseModel):
+    exam_id: int
+    exam_title: str
+    exam_type: str
+    average_rating: float | None
+    total_reviews: int
+    reviews: list[ExamReviewOut]
+
+
+class AllReviewsOut(BaseModel):
+    tracks: list[TrackReviewSummary]
+    exams: list[ExamReviewSummary]
+    total_reviews: int
+
+
