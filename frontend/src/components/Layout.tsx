@@ -28,7 +28,7 @@ export function Layout() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-academy-bg text-slate-100 font-sans">
+    <div className="min-h-screen flex flex-col w-full bg-academy-bg text-slate-100 font-sans">
       {/* ── Header ─────────────────────────────────────────── */}
       <header className="border-b border-academy-border bg-academy-bg/85 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-2">

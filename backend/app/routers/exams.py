@@ -5,7 +5,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from app.auth import CurrentUser
+from app.auth import CurrentUser, CurrentAdmin
 from app.database import get_db
 from app.models import (
     Exam,
@@ -23,6 +23,8 @@ from app.schemas import (
     SelectedTracksExamRequest,
     StartExamResponse,
     SubmitExamAnswerRequest,
+    ExamCreate,
+    ExamQuestionCreate,
 )
 from app.services.code_runner import run_tests_for_language
 from app.services.progress_service import count_completed_in_block, progress_summary
@@ -263,3 +265,72 @@ async def register_selected_tracks(
         db.add(UserSelectedTracksForExam(user_id=user.id, exam_id=body.exam_id, track_ids=body.track_ids))
     await db.commit()
     return {"message": "Курсы сохранены", "track_ids": body.track_ids}
+
+
+@router.post("", response_model=ExamOut)
+async def create_exam(
+    body: ExamCreate,
+    admin: CurrentAdmin,
+    lang: str = Query(default="ru", regex="^(ru|en|kz)$"),
+    db: AsyncSession = Depends(get_db),
+):
+    exam = Exam(
+        exam_type=ExamType(body.exam_type),
+        title_ru=body.title_ru,
+        title_en=body.title_en,
+        title_kz=body.title_kz,
+        description_ru=body.description_ru,
+        description_en=body.description_en,
+        description_kz=body.description_kz,
+        pass_percent=body.pass_percent,
+        time_limit_min=body.time_limit_min,
+        max_attempts=body.max_attempts,
+    )
+    db.add(exam)
+    await db.flush()
+
+    if exam.exam_type == ExamType.difficulty_block and body.track_ids and getattr(body, "difficulty_id", None):
+        block = ExamDifficultyBlock(
+            exam_id=exam.id,
+            track_id=body.track_ids[0],
+            difficulty_id=body.difficulty_id,
+        )
+        db.add(block)
+
+    await db.commit()
+    await db.refresh(exam)
+    return _exam_out(exam, True, lang)
+
+
+@router.post("/{exam_id}/questions")
+async def add_exam_question(
+    exam_id: int,
+    body: ExamQuestionCreate,
+    admin: CurrentAdmin,
+    db: AsyncSession = Depends(get_db),
+):
+    exam = await db.get(Exam, exam_id)
+    if not exam:
+        raise HTTPException(404, "Экзамен не найден")
+
+    # Count existing questions to determine order_num
+    q = await db.execute(
+        select(ExamQuestion).where(ExamQuestion.exam_id == exam_id)
+    )
+    existing = q.scalars().all()
+    order_num = len(existing) + 1
+
+    question = ExamQuestion(
+        exam_id=exam_id,
+        order_num=order_num,
+        task_text_ru=body.task_text_ru,
+        task_text_en=body.task_text_en,
+        task_text_kz=body.task_text_kz,
+        starter_code=body.starter_code,
+        tests={"cases": body.tests.get("cases", body.tests)},
+        language_id=body.language_id,
+    )
+    db.add(question)
+    await db.commit()
+    await db.refresh(question)
+    return {"id": question.id, "order_num": question.order_num, "message": "Вопрос добавлен"}

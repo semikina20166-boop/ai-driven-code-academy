@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Code2, Loader2, Play } from "lucide-react";
+import { Code2, Loader2, Play, Plus } from "lucide-react";
 import { api } from "../api/client";
 import type { ProgressSummary, Track } from "../api/types";
 import { useI18n, tx } from "../i18n/I18nContext";
+import { useAuth } from "../context/AuthContext";
+import { AddCourseModal, AddLanguageModal } from "../components/admin/AdminModals";
 
 const LANG_COLORS: Record<string, string> = {
   python:     "from-yellow-500/20 to-yellow-600/5 border-yellow-500/30",
@@ -15,15 +17,22 @@ const LANG_COLORS: Record<string, string> = {
 
 export function DashboardPage() {
   const { lang, t } = useI18n();
+  const { user } = useAuth();
   const [tracks, setTracks] = useState<Track[]>([]);
   const [progress, setProgress] = useState<ProgressSummary | null>(null);
   const [loading, setLoading] = useState(true);
   const [starting, setStarting] = useState<number | null>(null);
+  const [isAddCourseOpen, setIsAddCourseOpen] = useState(false);
+  const [isAddLanguageOpen, setIsAddLanguageOpen] = useState(false);
 
-  useEffect(() => {
+  const fetchTracks = () => {
     Promise.all([api.get<Track[]>("/tracks"), api.get<ProgressSummary>("/progress/summary")])
       .then(([tr, p]) => { setTracks(tr); setProgress(p); })
       .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    fetchTracks();
   }, []);
 
   async function handleStart(trackId: number) {
@@ -42,7 +51,25 @@ export function DashboardPage() {
 
   return (
     <div>
-      <h1 className="text-xl sm:text-2xl font-bold mb-1">{tx(t.dashboard.title, lang)}</h1>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-1">
+        <h1 className="text-xl sm:text-2xl font-bold">{tx(t.dashboard.title, lang)}</h1>
+        {user?.is_admin && (
+          <div className="flex gap-2 mt-2 sm:mt-0">
+            <button
+              onClick={() => setIsAddLanguageOpen(true)}
+              className="flex items-center gap-1 px-3 py-1.5 text-sm rounded-lg border border-academy-accent text-academy-accent hover:bg-academy-accent/10 font-medium transition-colors"
+            >
+              <Plus className="w-4 h-4" /> Добавить язык
+            </button>
+            <button
+              onClick={() => setIsAddCourseOpen(true)}
+              className="flex items-center gap-1 px-3 py-1.5 text-sm rounded-lg bg-academy-accent hover:bg-blue-600 font-medium transition-colors"
+            >
+              <Plus className="w-4 h-4" /> Добавить курс
+            </button>
+          </div>
+        )}
+      </div>
       <p className="text-academy-muted mb-5 text-sm sm:text-base">{tx(t.dashboard.subtitle, lang)}</p>
 
       {progress && (
@@ -102,6 +129,17 @@ export function DashboardPage() {
           );
         })}
       </div>
+
+      <AddCourseModal
+        isOpen={isAddCourseOpen}
+        onClose={() => setIsAddCourseOpen(false)}
+        onSuccess={fetchTracks}
+      />
+      <AddLanguageModal
+        isOpen={isAddLanguageOpen}
+        onClose={() => setIsAddLanguageOpen(false)}
+        onSuccess={fetchTracks}
+      />
     </div>
   );
 }

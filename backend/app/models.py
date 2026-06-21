@@ -101,6 +101,7 @@ class User(Base):
     email: Mapped[str] = mapped_column(String(255), unique=True)
     password_hash: Mapped[str] = mapped_column(Text)
     display_name: Mapped[str | None] = mapped_column(String(128), nullable=True)
+    is_admin: Mapped[bool] = mapped_column(Boolean, default=False)
     is_premium: Mapped[bool] = mapped_column(Boolean, default=False)
     hints_used_today: Mapped[int] = mapped_column(Integer, default=0)
     last_hint_date: Mapped[datetime.date] = mapped_column(Date, default=func.current_date())

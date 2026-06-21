@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Library, BookOpen, Crown, Lock, ChevronRight, Play, Loader2, Code2, ArrowRight } from "lucide-react";
+import { Library, BookOpen, Crown, Lock, ChevronRight, Play, Loader2, Code2, ArrowRight, Plus } from "lucide-react";
 import { api } from "../api/client";
 import { useAuth } from "../context/AuthContext";
 import { useI18n, tx } from "../i18n/I18nContext";
+import { AddLectureModal } from "../components/admin/AdminModals";
 
 interface LectureLevel {
   id: number;
@@ -31,6 +32,21 @@ export function LecturesPage() {
   const [selectedLevel, setSelectedLevel] = useState<LectureLevel | null>(null);
   // Mobile: show sidebar or content
   const [mobileView, setMobileView] = useState<"sidebar" | "content">("sidebar");
+  const [isLectureOpen, setIsLectureOpen] = useState(false);
+
+  const reload = () => {
+    api
+      .get<TrackLectures[]>("/lectures")
+      .then((res) => {
+        setData(res);
+        if (res.length > 0) {
+          setSelectedTrack(res[0]);
+          if (res[0].levels.length > 0) setSelectedLevel(res[0].levels[0]);
+        }
+      })
+      .catch((err) => console.error("Error loading lectures:", err))
+      .finally(() => setLoading(false));
+  };
 
   const difficultyLabel = (code: string) => {
     const key = code as keyof typeof t.lectures.difficulty;
@@ -38,19 +54,7 @@ export function LecturesPage() {
   };
 
   useEffect(() => {
-    api
-      .get<TrackLectures[]>("/lectures")
-      .then((res) => {
-        setData(res);
-        if (res.length > 0) {
-          setSelectedTrack(res[0]);
-          if (res[0].levels.length > 0) {
-            setSelectedLevel(res[0].levels[0]);
-          }
-        }
-      })
-      .catch((err) => console.error("Error loading lectures:", err))
-      .finally(() => setLoading(false));
+    reload();
   }, []);
 
   if (loading) {
@@ -133,9 +137,19 @@ export function LecturesPage() {
 
           {/* Levels List */}
           <div className="flex-1 rounded-xl border border-academy-border bg-academy-panel p-4 overflow-y-auto space-y-5 min-h-0 max-h-[60vh] lg:max-h-none">
+            <div className="flex items-center justify-between mb-1">
             <h3 className="text-xs font-bold text-academy-muted uppercase tracking-wider">
               {tx(t.lectures.contents, lang)}
             </h3>
+            {user?.is_admin && selectedTrack && (
+              <button
+                onClick={() => setIsLectureOpen(true)}
+                className="flex items-center gap-1 px-2 py-1 text-xs rounded-lg bg-academy-accent hover:bg-blue-600 font-medium transition-colors"
+              >
+                <Plus className="w-3 h-3" /> Добавить лекцию
+              </button>
+            )}
+          </div>
 
             {groupedLevels.map((group) => {
               if (group.items.length === 0) return null;
@@ -269,6 +283,15 @@ export function LecturesPage() {
           )}
         </main>
       </div>
+
+      {selectedTrack && (
+        <AddLectureModal
+          trackId={selectedTrack.track_id}
+          isOpen={isLectureOpen}
+          onClose={() => setIsLectureOpen(false)}
+          onSuccess={() => { setIsLectureOpen(false); reload(); }}
+        />
+      )}
     </div>
   );
 }

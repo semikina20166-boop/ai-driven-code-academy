@@ -1,19 +1,25 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, Loader2 } from "lucide-react";
+import { ArrowLeft, Loader2, Plus } from "lucide-react";
 import { api } from "../api/client";
 import type { LevelMapItem, Track } from "../api/types";
 import { LevelMap } from "../components/LevelMap";
 import { ReviewsSection } from "../components/ReviewsSection";
+import { useAuth } from "../context/AuthContext";
+import { AddTaskModal, AddExamModal } from "../components/admin/AdminModals";
 
 export function TrackPage() {
   const { trackId } = useParams<{ trackId: string }>();
   const id = Number(trackId);
+  const { user } = useAuth();
   const [track, setTrack] = useState<Track | null>(null);
   const [levels, setLevels] = useState<LevelMapItem[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const [isTaskOpen, setIsTaskOpen] = useState(false);
+  const [isExamOpen, setIsExamOpen] = useState(false);
+
+  const fetchData = () => {
     if (!id) return;
     Promise.all([
       api.get<Track[]>("/tracks").then((list) => list.find((t) => t.id === id) ?? null),
@@ -24,6 +30,10 @@ export function TrackPage() {
         setLevels(l);
       })
       .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    fetchData();
   }, [id]);
 
   if (loading) {
@@ -43,8 +53,26 @@ export function TrackPage() {
         <ArrowLeft className="w-4 h-4" />
         Все треки
       </Link>
-      <h1 className="text-2xl font-bold mb-1">{track?.language?.name ?? "Трек"}</h1>
-      <p className="text-academy-muted mb-8">Карта уровней — выберите доступный этап</p>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-1">
+        <h1 className="text-2xl font-bold">{track?.language?.name ?? "Трек"}</h1>
+        {user?.is_admin && (
+          <div className="flex flex-wrap gap-2 mt-2 sm:mt-0">
+            <button
+              onClick={() => setIsTaskOpen(true)}
+              className="flex items-center gap-1 px-3 py-1.5 text-sm rounded-lg bg-academy-accent hover:bg-blue-600 font-medium transition-colors"
+            >
+              <Plus className="w-4 h-4" /> Добавить задание
+            </button>
+            <button
+              onClick={() => setIsExamOpen(true)}
+              className="flex items-center gap-1 px-3 py-1.5 text-sm rounded-lg bg-academy-accent hover:bg-blue-600 font-medium transition-colors"
+            >
+              <Plus className="w-4 h-4" /> Добавить экзамен
+            </button>
+          </div>
+        )}
+      </div>
+      <p className="text-academy-muted mb-8 mt-2">Карта уровней — выберите доступный этап</p>
       <LevelMap trackId={id} levels={levels} />
 
       {/* Divider */}
@@ -52,6 +80,19 @@ export function TrackPage() {
 
       {/* Reviews section */}
       <ReviewsSection trackId={id} />
+
+      <AddTaskModal
+        trackId={id}
+        isOpen={isTaskOpen}
+        onClose={() => setIsTaskOpen(false)}
+        onSuccess={fetchData}
+      />
+      <AddExamModal
+        trackId={id}
+        isOpen={isExamOpen}
+        onClose={() => setIsExamOpen(false)}
+        onSuccess={fetchData}
+      />
     </div>
   );
 }

@@ -37,9 +37,11 @@ async def get_lectures(
     out: list[TrackLecturesOut] = []
 
     for track in tracks:
+        # Only include levels that have theory (actual lectures, not tasks)
+        lecture_levels = [l for l in track.levels if l.theory_ru]
         # Sort levels by difficulty sort_order, then order_num
         sorted_levels = sorted(
-            track.levels,
+            lecture_levels,
             key=lambda l: (l.difficulty.sort_order, l.order_num)
         )
 

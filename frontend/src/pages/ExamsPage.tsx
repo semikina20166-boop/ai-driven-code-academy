@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { BookOpen, Clock, Loader2, Lock, Unlock, Crown, CheckCircle2 } from "lucide-react";
+import { BookOpen, Clock, Loader2, Lock, Unlock, Crown, CheckCircle2, Plus } from "lucide-react";
 import { api } from "../api/client";
 import { useAuth } from "../context/AuthContext";
 import { useI18n, tx } from "../i18n/I18nContext";
 import type { Exam, Track } from "../api/types";
+import { AddExamQuestionModal } from "../components/admin/AdminModals";
 
 export function ExamsPage() {
   const { user } = useAuth();
@@ -13,6 +14,7 @@ export function ExamsPage() {
   const [tracks, setTracks] = useState<Track[]>([]);
   const [selectedTrackIds, setSelectedTrackIds] = useState<number[]>([]);
   const [loading, setLoading] = useState(true);
+  const [addQuestionExamId, setAddQuestionExamId] = useState<number | null>(null);
 
   const isPremium = user?.is_premium;
 
@@ -158,10 +160,27 @@ export function ExamsPage() {
                   {tx(t.exams.locked, lang)}
                 </span>
               )}
+              {user?.is_admin && (
+                <button
+                  onClick={() => setAddQuestionExamId(exam.id)}
+                  className="flex items-center gap-1 px-3 py-1.5 text-xs rounded-lg bg-purple-600 hover:bg-purple-700 font-medium transition-colors shrink-0"
+                >
+                  <Plus className="w-3.5 h-3.5" /> Добавить вопрос
+                </button>
+              )}
             </article>
           );
         })}
       </div>
+
+      {addQuestionExamId !== null && (
+        <AddExamQuestionModal
+          examId={addQuestionExamId}
+          isOpen={true}
+          onClose={() => setAddQuestionExamId(null)}
+          onSuccess={() => setAddQuestionExamId(null)}
+        />
+      )}
     </div>
   );
 }

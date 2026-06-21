@@ -2,11 +2,11 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from sqlalchemy import text
-from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy.exc import SQLAlchemyError, OperationalError, IntegrityError
 
 from app.config import settings
 from app.database import engine
-from app.routers import ai_hints, auth, exams, levels, progress, tracks, lectures, reviews
+from app.routers import ai_hints, auth, exams, levels, progress, tracks, lectures, reviews, languages
 
 app = FastAPI(
     title="AI-Driven Code Academy API",
@@ -25,8 +25,8 @@ app.add_middleware(
 )
 
 
-@app.exception_handler(SQLAlchemyError)
-async def database_error_handler(_request: Request, _exc: SQLAlchemyError):
+@app.exception_handler(OperationalError)
+async def database_error_handler(_request: Request, _exc: OperationalError):
     return JSONResponse(
         status_code=503,
         content={
@@ -35,6 +35,13 @@ async def database_error_handler(_request: Request, _exc: SQLAlchemyError):
                 "и выполните database/schema.sql и seed.sql. Проверьте DATABASE_URL в backend/.env"
             )
         },
+    )
+
+@app.exception_handler(IntegrityError)
+async def integrity_error_handler(_request: Request, exc: IntegrityError):
+    return JSONResponse(
+        status_code=400,
+        content={"detail": f"Ошибка данных: возможно, указан неверный ID (например, несуществующий Language ID). Детали: {exc.orig}"}
     )
 
 
@@ -210,6 +217,7 @@ app.include_router(ai_hints.router)
 app.include_router(exams.router)
 app.include_router(lectures.router)
 app.include_router(reviews.router)
+app.include_router(languages.router)
 
 
 @app.get("/health")

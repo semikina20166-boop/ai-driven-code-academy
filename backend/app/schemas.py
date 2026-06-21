@@ -26,6 +26,7 @@ class UserOut(BaseModel):
     email: EmailStr
     display_name: str | None
     is_premium: bool = False
+    is_admin: bool = False
 
     model_config = {"from_attributes": True}
 
@@ -307,4 +308,60 @@ class AllReviewsOut(BaseModel):
     exams: list[ExamReviewSummary]
     total_reviews: int
 
+
+# ── Схемы для создания сущностей (Админка) ────────────────────────────────────
+
+class TrackCreate(BaseModel):
+    language_id: int
+    title_ru: str = ""
+    title_en: str = ""
+    title_kz: str = ""
+    description_ru: str | None = None
+    description_en: str | None = None
+    description_kz: str | None = None
+
+
+class LanguageCreate(BaseModel):
+    code: str
+    name: str
+
+
+class LevelCreate(BaseModel):
+    difficulty_id: int
+    title_ru: str = ""
+    title_en: str = ""
+    title_kz: str = ""
+    task_text_ru: str = ""
+    task_text_en: str = ""
+    task_text_kz: str = ""
+    starter_code: str = ""
+    solution_tests: dict = Field(default_factory=dict)
+    allowed_concepts: list[str] = Field(default_factory=list)
+    theory_ru: str | None = None
+    theory_en: str | None = None
+    theory_kz: str | None = None
+
+
+class ExamCreate(BaseModel):
+    exam_type: str
+    title_ru: str = ""
+    title_en: str = ""
+    title_kz: str = ""
+    description_ru: str | None = None
+    description_en: str | None = None
+    description_kz: str | None = None
+    pass_percent: int = 70
+    time_limit_min: int | None = None
+    max_attempts: int = 3
+    track_ids: list[int] = Field(default_factory=list)
+    difficulty_id: int | None = None
+
+
+class ExamQuestionCreate(BaseModel):
+    task_text_ru: str = ""
+    task_text_en: str = ""
+    task_text_kz: str = ""
+    starter_code: str = ""
+    tests: dict = Field(default_factory=dict)
+    language_id: int | None = None
 

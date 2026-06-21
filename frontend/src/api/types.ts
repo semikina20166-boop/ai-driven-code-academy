@@ -8,6 +8,7 @@ export interface User {
   email: string;
   display_name: string | null;
   is_premium: boolean;
+  is_admin: boolean;
 }
 
 export interface Language {
@@ -213,5 +214,46 @@ export interface AllReviewsData {
   tracks: TrackReviewSummary[];
   exams: ExamReviewSummary[];
   total_reviews: number;
+}
+
+export interface TrackCreate {
+  language_id: number;
+  title_ru?: string;
+  title_en?: string;
+  title_kz?: string;
+  description_ru?: string | null;
+  description_en?: string | null;
+  description_kz?: string | null;
+}
+
+export interface LevelCreate {
+  difficulty_id: number;
+  title_ru?: string;
+  title_en?: string;
+  title_kz?: string;
+  task_text_ru?: string;
+  task_text_en?: string;
+  task_text_kz?: string;
+  starter_code?: string;
+  solution_tests?: Record<string, unknown>;
+  allowed_concepts?: string[];
+  theory_ru?: string | null;
+  theory_en?: string | null;
+  theory_kz?: string | null;
+}
+
+export interface ExamCreate {
+  exam_type: string;
+  title_ru?: string;
+  title_en?: string;
+  title_kz?: string;
+  description_ru?: string | null;
+  description_en?: string | null;
+  description_kz?: string | null;
+  pass_percent?: number;
+  time_limit_min?: number | null;
+  max_attempts?: number;
+  track_ids?: number[];
+  difficulty_id?: number | null;
 }
 
